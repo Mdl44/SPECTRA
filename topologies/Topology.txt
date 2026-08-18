@@ -1,0 +1,279 @@
+Sales      - 62H  - R-Corp        - VLAN 10
+Marketing  - 62H  - R-Corp        - VLAN 11
+HR         - 31H  - R-Corp        - VLAN 12
+Finance    - 30H  - R-Corp        - VLAN 13
+
+R&D            - 1024H - R-RD           - VLAN 20
+SOC            - 510H  - R-SOC          - VLAN 21
+Data Center    - 255H  - R-DC           - VLAN 22
+Malware Lab    - 126H  - R-MalwareLab   - VLAN 23
+Guest          - 127H  - R-Guest        - VLAN 24
+QA/Testing     - 14H   - R-QA           - VLAN 25
+IT/Helpdesk    - 14H   - R-IT           - VLAN 26
+Management/NOC - 14H    - R-Mgmt         - VLAN 27
+
+
+vlsm
+NA = 10.0.0.0/16
+BA = 10.0.255.255/16
+RA = 10.0.0.1 - 10.0.255.254/16
+
+
+P2P router-router
+NA = 10.1.0.0/24
+BA = 10.1.0.255/24
+RA = 10.1.0.1 - 10.1.0.254/24
+
+-------------------------------------------------------------------------------------------------------------
+
+LAN - 10.0.0.0/16 
+
+1024 - 2^11
+510 - 2^9
+255 - 2^9
+127 - 2^8
+126 - 2^7
+62 -  2^6
+62 - 2^6
+31 - 2^6
+30 - 2^5
+14 - 2^4
+14 - 2^4
+14 - 2^4
+
+R&D
+N.A =10.0.0.0/21
+B.A = 10.0.7.255/21
+R.A = 10.0.0.1 - 10.0.7.254/21
+
+SOC
+N.A = 10.0.8.0/23
+B.A = 10.0.9.255/23
+R.A = 10.0.8.1 - 10.0.9.254/23
+
+DATA_CENTER
+N.A = 10.0.10.0/23
+B.A = 10.0.11.255/23
+R.A = 10.0.10.1 - 10.0.11.254
+
+GUEST
+N.A = 10.0.12.0/24
+B.A = 10.0.12.255/24
+R.A = 10.0.12.1 - 10.0.12.254/24
+
+MALWARE_LAB
+N.A = 10.0.13.0/25
+B.A = 10.0.13.127/25
+R.A = 10.0.13.1 - 10.0.13.126/25
+
+SALES
+N.A = 10.0.13.128/26
+B.A = 10.0.13.191/26
+R.A = 10.0.13.129 - 10.0.13.190/26
+
+MARKETING
+N.A = 10.0.13.192/26
+B.A = 10.0.13.255/26
+R.A = 10.0.13.193 - 10.0.13.254/26
+
+HR
+N.A = 10.0.14.0/26
+B.A = 10.0.14.63/26
+R.A = 10.0.14.1 - 10.0.14.62/26
+
+FINANCE
+N.A = 10.0.14.64/27
+B.A = 10.0.14.95/27
+R.A = 10.0.14.65 - 10.0.14.94/27
+
+QA/TESTING
+N.A = 10.0.14.96/28
+B.A = 10.0.14.111/28
+R.A = 10.0.14.97 - 10.0.14.110/28
+
+IT/HELPDESK
+N.A = 10.0.14.112/28
+B.A = 10.0.14.127/28
+R.A = 10.0.14.113 - 10.0.14.126/28
+
+MANAGEMENT
+N.A = 10.0.14.128/28
+B.A = 10.0.14.143/28
+R.A = 10.0.14.129- 10.0.14.142/28
+
+MAN
+N.A = 10.0.14.144/29
+B.A = 10.0.14.151/29
+R.A = 10.0.14.145 - 10.0.14.150/29
+
+LEGATURI P2P - 10.1.0.0/24
+
+--- NUCLEUL (CORE) ---
+Core 1 ↔ Core 2
+N.A = 10.1.0.0/30
+R.A = 10.1.0.1 - 10.1.0.2/30
+
+--- FIREWALL ---
+Firewall ↔ Core 1
+N.A = 10.1.0.4/30
+R.A = 10.1.0.5 - 10.1.0.6/30
+
+Firewall ↔ Core 2
+N.A = 10.1.0.8/30
+R.A = 10.1.0.9 - 10.1.0.10/30
+
+--- DISTRIBUTIE (Catre Core) ---
+R-Corp ↔ Core 1
+N.A = 10.1.0.12/30
+R.A = 10.1.0.13 - 10.1.0.14/30
+
+R-Corp ↔ Core 2
+N.A = 10.1.0.16/30
+R.A = 10.1.0.17 - 10.1.0.18/30
+
+R-RD ↔ Core 1
+N.A = 10.1.0.20/30
+R.A = 10.1.0.21 - 10.1.0.22/30
+
+R-RD ↔ Core 2
+N.A = 10.1.0.24/30
+R.A = 10.1.0.25 - 10.1.0.26/30
+
+R-SOC ↔ Core 1
+N.A = 10.1.0.28/30
+R.A = 10.1.0.29 - 10.1.0.30/30
+
+R-SOC ↔ Core 2
+N.A = 10.1.0.32/30
+R.A = 10.1.0.33 - 10.1.0.34/30
+
+R-DC ↔ Core 1
+N.A = 10.1.0.36/30
+R.A = 10.1.0.37 - 10.1.0.38/30
+
+R-DC ↔ Core 2
+N.A = 10.1.0.40/30
+R.A = 10.1.0.41 - 10.1.0.42/30
+
+R-MalwareLab ↔ Core 1
+N.A = 10.1.0.44/30
+R.A = 10.1.0.45 - 10.1.0.46/30
+
+R-MalwareLab ↔ Core 2
+N.A = 10.1.0.48/30
+R.A = 10.1.0.49 - 10.1.0.50/30
+
+R-Guest ↔ Core 1
+N.A = 10.1.0.52/30
+R.A = 10.1.0.53 - 10.1.0.54/30
+
+R-Guest ↔ Core 2
+N.A = 10.1.0.56/30
+R.A = 10.1.0.57 - 10.1.0.58/30
+
+R-QA ↔ Core 1
+N.A = 10.1.0.60/30
+R.A = 10.1.0.61 - 10.1.0.62/30
+
+R-QA ↔ Core 2
+N.A = 10.1.0.64/30
+R.A = 10.1.0.65 - 10.1.0.66/30
+
+R-IT ↔ Core 1
+N.A = 10.1.0.68/30
+R.A = 10.1.0.69 - 10.1.0.70/30
+
+R-IT ↔ Core 2
+N.A = 10.1.0.72/30
+R.A = 10.1.0.73 - 10.1.0.74/30
+
+R-Mgmt ↔ Core 1
+N.A = 10.1.0.76/30
+R.A = 10.1.0.77 - 10.1.0.78/30
+
+R-Mgmt ↔ Core 2
+N.A = 10.1.0.80/30
+R.A = 10.1.0.81 - 10.1.0.82/30
+
+ISP - Firewall
+N.A = 203.0.113.0/30
+Firewall (public) = 203.0.113.1
+ISP = 203.0.113.2
+
+-------------------------------------------------------------------------------------------------------------
+ALOCARE ADRESE IPv6 (Gateway, Mgmt, Stateful DHCPv6 Pool) - Prefix fd44:f1:f1::/48
+-------------------------------------------------------------------------------------------------------------
+LAN             Gateway              Switch-uri (statice)         Pool DHCPv6
+R&D             fd44:f1:f1:20::1     fd44:f1:f1:20::2 - ::3       fd44:f1:f1:20::10 - fd44:f1:f1:20::ffff
+SOC             fd44:f1:f1:21::1     fd44:f1:f1:21::2 - ::3       fd44:f1:f1:21::10 - fd44:f1:f1:21::ffff
+Data Center     fd44:f1:f1:22::1     fd44:f1:f1:22::2 - ::3       fd44:f1:f1:22::10 - fd44:f1:f1:22::ffff
+Guest           fd44:f1:f1:24::1     fd44:f1:f1:24::2             fd44:f1:f1:24::10 - fd44:f1:f1:24::ffff
+Malware Lab     fd44:f1:f1:23::1     fd44:f1:f1:23::2 - ::3       fd44:f1:f1:23::10 - fd44:f1:f1:23::ffff
+Sales           fd44:f1:f1:10::1     -- (pe MAN)                  fd44:f1:f1:10::10 - fd44:f1:f1:10::ffff
+Marketing       fd44:f1:f1:11::1     -- (pe MAN)                  fd44:f1:f1:11::10 - fd44:f1:f1:11::ffff
+HR              fd44:f1:f1:12::1     -- (pe MAN)                  fd44:f1:f1:12::10 - fd44:f1:f1:12::ffff
+Finance         fd44:f1:f1:13::1     -- (pe MAN)                  fd44:f1:f1:13::10 - fd44:f1:f1:13::ffff
+QA/Testing      fd44:f1:f1:25::1     fd44:f1:f1:25::2             fd44:f1:f1:25::10 - fd44:f1:f1:25::ffff
+IT/Helpdesk     fd44:f1:f1:26::1     fd44:f1:f1:26::2             fd44:f1:f1:26::10 - fd44:f1:f1:26::ffff
+Mgmt/NOC        fd44:f1:f1:27::1     fd44:f1:f1:27::2             STATIC ONLY
+MAN (Mgmt-Sw)   fd44:f1:f1:99::1     fd44:f1:f1:99::2 - ::6       STATIC ONLY
+
+-------------------------------------------------------------------------------------------------------------
+ALOCARE ADRESE IPv4 (Gateway, Mgmt, DHCP Pool)
+-------------------------------------------------------------------------------------------------------------
+LAN             Gateway        Switch-uri (statice)    Pool DHCP
+R&D             10.0.0.1       10.0.0.2 - 10.0.0.3     10.0.0.21 - 10.0.7.254     (Rezervat: .1 - .20)
+SOC             10.0.8.1       10.0.8.2 - 10.0.8.3     10.0.8.21 - 10.0.9.254     (Rezervat: .1 - .20)
+Data Center     10.0.10.1      10.0.10.2 - 10.0.10.3   10.0.10.21 - 10.0.11.254   (Rezervat: .1 - .20)
+Guest           10.0.12.1      10.0.12.2               10.0.12.21 - 10.0.12.254   (Rezervat: .1 - .20)
+Malware Lab     10.0.13.1      10.0.13.2 - 10.0.13.3   10.0.13.21 - 10.0.13.126   (Rezervat: .1 - .20)
+Sales           10.0.13.129    -- (pe MAN)             10.0.13.140 - 10.0.13.190  (Rezervat: primele ~11)
+Marketing       10.0.13.193    -- (pe MAN)             10.0.13.200 - 10.0.13.254  (Rezervat: primele ~7)
+HR              10.0.14.1      -- (pe MAN)             10.0.14.10 - 10.0.14.62    (Rezervat: primele ~9)
+Finance         10.0.14.65     -- (pe MAN)             10.0.14.75 - 10.0.14.94    (Rezervat: primele ~10)
+QA/Testing      10.0.14.97     10.0.14.98              10.0.14.100 - 10.0.14.110  (Rezervat: primele 3)
+IT/Helpdesk     10.0.14.113    10.0.14.114             10.0.14.116 - 10.0.14.126  (Rezervat: primele 3)
+Mgmt/NOC        10.0.14.129    10.0.14.130             STATIC ONLY (Max .142)
+MAN (Mgmt-Sw)   10.0.14.145    10.0.14.146 - .150      STATIC ONLY
+
+-------------------------------------------------------------------------------------------------------------
+LEGATURI P2P IPv6 - Bloc de tranzit: fd44:f1:f1:c04e::/64 (Subnetate in /127)
+-------------------------------------------------------------------------------------------------------------
+--- NUCLEUL (CORE) ---
+Core 1 ↔ Core 2         : fd44:f1:f1:c04e::0/127    (IP-uri: ::0 si ::1)
+
+--- FIREWALL ---
+Firewall ↔ Core 1       : fd44:f1:f1:c04e::2/127    (IP-uri: ::2 si ::3)
+Firewall ↔ Core 2       : fd44:f1:f1:c04e::4/127    (IP-uri: ::4 si ::5)
+
+--- DISTRIBUTIE (Catre Core) ---
+R-Corp ↔ Core 1         : fd44:f1:f1:c04e::6/127    (IP-uri: ::6 si ::7)
+R-Corp ↔ Core 2         : fd44:f1:f1:c04e::8/127    (IP-uri: ::8 si ::9)
+R-RD ↔ Core 1           : fd44:f1:f1:c04e::a/127    (IP-uri: ::a si ::b)
+R-RD ↔ Core 2           : fd44:f1:f1:c04e::c/127    (IP-uri: ::c si ::d)
+R-SOC ↔ Core 1          : fd44:f1:f1:c04e::e/127    (IP-uri: ::e si ::f)
+R-SOC ↔ Core 2          : fd44:f1:f1:c04e::10/127   (IP-uri: ::10 si ::11)
+R-DC ↔ Core 1           : fd44:f1:f1:c04e::12/127   (IP-uri: ::12 si ::13)
+R-DC ↔ Core 2           : fd44:f1:f1:c04e::14/127   (IP-uri: ::14 si ::15)
+R-MalwareLab ↔ Core 1   : fd44:f1:f1:c04e::16/127   (IP-uri: ::16 si ::17)
+R-MalwareLab ↔ Core 2   : fd44:f1:f1:c04e::18/127   (IP-uri: ::18 si ::19)
+R-Guest ↔ Core 1        : fd44:f1:f1:c04e::1a/127   (IP-uri: ::1a si ::1b)
+R-Guest ↔ Core 2        : fd44:f1:f1:c04e::1c/127   (IP-uri: ::1c si ::1d)
+R-QA ↔ Core 1           : fd44:f1:f1:c04e::1e/127   (IP-uri: ::1e si ::1f)
+R-QA ↔ Core 2           : fd44:f1:f1:c04e::20/127   (IP-uri: ::20 si ::21)
+R-IT ↔ Core 1           : fd44:f1:f1:c04e::22/127   (IP-uri: ::22 si ::23)
+R-IT ↔ Core 2           : fd44:f1:f1:c04e::24/127   (IP-uri: ::24 si ::25)
+R-Mgmt ↔ Core 1         : fd44:f1:f1:c04e::26/127   (IP-uri: ::26 si ::27)
+R-Mgmt ↔ Core 2         : fd44:f1:f1:c04e::28/127   (IP-uri: ::28 si ::29)
+
+g1/0/1-4 - LAN  10
+g1/0/5-8 - LAN 11
+g1/0/9-12 - LAN 12
+g1/0/13-16 LAN 13
+
+g1/0/17-20 channel-group 1 / 2
+g1/0/21-24 channel-group 2 / 3
+
+switch uri  3650
+routere ISR4431
+firewall 5505

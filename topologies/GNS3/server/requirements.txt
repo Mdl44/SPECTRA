@@ -1,0 +1,32 @@
+Flask==3.0.0
+gunicorn==21.2.0
+SQLAlchemy==2.0.23
+psycopg2-binary==2.9.9
+napalm==4.1.0
+netmiko==4.3.0
+Jinja2==3.1.2
+python-dotenv==1.0.0
+
+# --- SNMP polling / discovery ---
+pysnmp==4.4.12
+
+# --- topologie & graf de rețea (pentru harta topologică + discovery) ---
+networkx==3.2.1
+
+# --- scheduling pentru polling periodic (CPU, interfețe, congestie) ---
+APScheduler==3.10.4
+
+# --- autentificare, sesiuni + tokenuri REST API ---
+Flask-Login==0.6.3
+PyJWT==2.8.0
+
+# --- dashboard realtime (websockets pentru grafice live) ---
+Flask-SocketIO==5.3.6
+python-socketio==5.11.1
+eventlet==0.35.2
+
+# --- export PDF (reutilizează template-urile Jinja2 deja existente) ---
+WeasyPrint==60.2
+
+# --- alerte prin webhook ---
+requests==2.31.0

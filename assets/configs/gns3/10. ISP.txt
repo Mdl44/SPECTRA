@@ -1,0 +1,54 @@
+ena
+clock set 00:00:00 1 January 2026
+conf t
+
+hostname ISP
+no ip domain-lookup
+ip domain-name isp.com
+
+service password-encryption
+enable secret ciscosecpa55
+username Admin01 priv 15 secret Admin01pa55
+banner motd "ISP Core Router"
+
+crypto key generate rsa modulus 2048
+ip ssh version 2
+ip ssh time-out 60
+ip ssh authentication-retries 2
+
+line con 0
+ password ciscoconpa55
+ login
+ logging synchronous
+ exec-timeout 10 0
+ exit
+
+line vty 0 15
+ login local
+ transport input ssh
+ exec-timeout 15 0
+ exit
+interface GigabitEthernet0/0
+ description Link to Firewall
+ ip address 203.0.113.2 255.255.255.252
+ no shutdown
+ exit
+
+interface Loopback0
+ description Simularea serverului 8.8.8.8
+ ip address 8.8.8.8 255.255.255.255
+ no shutdown
+ exit
+
+interface range GigabitEthernet0/1 - 7
+ description UNUSED
+ shutdown
+ exit
+
+ interface range GigabitEthernet0/8 - 15
+ description UNUSED
+ shutdown
+ exit
+
+end
+write memory

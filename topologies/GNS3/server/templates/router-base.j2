@@ -1,0 +1,18 @@
+hostname {{ hostname }}
+!
+ip domain-name corp.net
+username Admin01 privilege 15 secret {{ admin_password }}
+!
+{% for vlan in vlans %}
+vlan {{ vlan.id }}
+ name {{ vlan.name }}
+!
+{% endfor %}
+{% for iface in interfaces %}
+interface {{ iface.name }}
+ description {{ iface.description }}
+ ip address {{ iface.ip }} {{ iface.mask }}
+ no shutdown
+!
+{% endfor %}
+end

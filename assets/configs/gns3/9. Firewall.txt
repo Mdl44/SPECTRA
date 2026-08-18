@@ -1,0 +1,102 @@
+enable
+conf t
+
+hostname Firewall
+domain-name corp.net
+
+enable password ciscosecpa55
+username Admin01 password Admin01pa55 privilege 15
+aaa authentication ssh console LOCAL
+
+crypto key generate rsa modulus 2048
+
+interface GigabitEthernet0/0
+ nameif inside1
+ security-level 100
+ ip address 10.1.0.6 255.255.255.252
+ ipv6 address fd44:f1:f1:c04e::3/127
+ ipv6 enable
+ ipv6 ospf 1 area 0
+ no shutdown
+ ospf authentication message-digest
+ ospf message-digest-key 1 md5 OspfAuthPa55
+ exit
+
+interface GigabitEthernet0/1
+ nameif inside2
+ security-level 100
+ ip address 10.1.0.10 255.255.255.252
+ ipv6 address fd44:f1:f1:c04e::5/127
+ ipv6 enable
+ ipv6 ospf 1 area 0
+ no shutdown
+ ospf cost 50
+ ospf authentication message-digest
+ ospf message-digest-key 1 md5 OspfAuthPa55
+ exit
+
+interface GigabitEthernet0/2
+ nameif outside
+ security-level 0
+ ip address 203.0.113.1 255.255.255.252
+ no shutdown
+ exit
+
+route outside 0.0.0.0 0.0.0.0 203.0.113.2 1
+
+router ospf 1
+ router-id 203.0.113.1
+ network 10.1.0.4 255.255.255.252 area 0
+ network 10.1.0.8 255.255.255.252 area 0
+ default-information originate
+ exit
+
+ipv6 router ospf 1
+ router-id 203.0.113.1
+ exit
+
+object network internal_net1
+ subnet 10.0.0.0 255.0.0.0
+ nat (inside1,outside) dynamic interface
+ exit
+
+object network internal_net2
+ subnet 10.0.0.0 255.0.0.0
+ nat (inside2,outside) dynamic interface
+ exit
+
+same-security-traffic permit inter-interface
+same-security-traffic permit intra-interface
+
+policy-map global_policy
+ class inspection_default
+  inspect icmp
+  inspect icmp error
+ exit
+exit
+service-policy global_policy global
+
+clock timezone EET 2
+clock summer-time EEST recurring
+ntp server 10.0.14.142 source inside1
+
+logging enable
+logging timestamp
+logging host inside1 10.0.14.142
+logging trap debugging
+
+snmp-server group NOC-GROUP v3 priv
+snmp-server user noc-agent NOC-GROUP v3 auth sha Snmpauthpa55 priv aes 128 Snmpprivpa55
+snmp-server host inside1 10.0.14.142 version 3 noc-agent
+snmp-server host inside2 10.0.14.142 version 3 noc-agent
+snmp-server host inside1 10.0.14.135 poll version 3 noc-agent
+snmp-server host inside2 10.0.14.135 poll version 3 noc-agent
+snmp-server location Firewall
+snmp-server contact Administrator
+
+ssh version 2
+ssh timeout 60
+ssh 10.0.14.128 255.255.255.240 inside1
+ssh 10.0.14.128 255.255.255.240 inside2
+
+write memory
